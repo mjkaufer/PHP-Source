@@ -23,4 +23,3 @@ class MakeSourceCommand(sublime_plugin.TextCommand):
 
         with open(outName, 'w') as outFile:
             outFile.write(fileContents)
-            outFile.close()
