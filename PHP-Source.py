@@ -12,24 +12,15 @@ class MakeSourceCommand(sublime_plugin.TextCommand):
 
         sourceName = self.view.file_name()
 
-        out = ""
+        outName = ""
 
         if sourceName == None:  # user hasn't saved the file yet
             return
-        elif isPHPFile(sourceName):
-            out = sourceName + "s"
+        elif sourceName.endswith(".php"):
+            outName = sourceName + "s"
         else:
-            out = sourceName + ".phps"
+            outName = sourceName + ".phps"
 
-        open(out, 'w').write(fileContents)
-
-
-def isPHPFile(fileName):
-
-    try:
-        extensionIndex = fileName.rindex(".php")
-
-        return fileName[:extensionIndex] + ".php" == fileName
-
-    except ValueError:
-        return False
+        with open(outName, 'w') as outFile:
+            outFile.write(fileContents)
+            outFile.close()
